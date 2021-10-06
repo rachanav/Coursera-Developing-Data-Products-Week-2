@@ -1,37 +1,35 @@
-## Welcome to GitHub Pages
+---
+title: "My First Leaflet Map"
+author: "Rachana"
+date: "6 Oct 2021"
+output: html_document
+---
 
-You can use the [editor on GitHub](https://github.com/rachanav/Coursera-Developing-Data-Products-Week-2/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+The source code is available at [GitHub](https://github.com/Krysek/Coursera-Data-Science-Specialization-Developing-Data-Products-Week-2-Assignment). [Just click here!](https://github.com/Krysek/Coursera-Data-Science-Specialization-Developing-Data-Products-Week-2-Assignment)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+## My First Leaflet Map
+Create a leaflet map object.
+```{r cars}
+library(leaflet)
+map <- leaflet() %>% addTiles()
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Create a marker with a picture of Benrath Palace and a link to its homepage.
+```{r}
+benrathPalaceIcon <- makeIcon(
+   iconUrl = "http://www.schloss-benrath.de/fileadmin/_processed_/csm_corps-de-logis-blumen_2e04b2b859.jpg",
+   iconWidth = 30*408/255, iconHeight = 30,
+   iconAnchorX = 30*408/255/2, iconAnchorY = 30/2
+)
+```
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rachanav/Coursera-Developing-Data-Products-Week-2/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Add the marker to the map and display the map.
+```{r}
+benrathPalacePopup <- c("<a href= 'http://www.schloss-benrath.de/welcome/?L=1' >Benrath Palace<br><img src='http://www.schloss-benrath.de/fileadmin/_processed_/csm_corps-de-logis-blumen_2e04b2b859.jpg' width='210' height='132'  alt='Foto Corps de Logis' title='Foto Corps de Logi'></a>")
+map %>%
+   addTiles() %>%
+   addMarkers(lat=51.161027, lng=6.870550, popup = benrathPalacePopup)
+```
